@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjoj5bf6ks8yl"]
+
+[ext_resource type="Texture2D" uid="uid://ibx178m8ltmi" path="res://assets/Objects/Free_Chicken_House.png" id="1_tk35d"]
+
+[node name="ChickenHouse" type="AnimatableBody2D"]
+position = Vector2(0, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -11)
+texture = ExtResource("1_tk35d")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -11)
+build_mode = 1
+polygon = PackedVector2Array(10, 13, 13, 13, 13, 19, 10, 19, 10, 15)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-22, -38)
+scale = Vector2(1, 2.23214)
+build_mode = 1
+polygon = PackedVector2Array(10, 6.764, 13, 6.764, 35, 6.764, 35, 18.412, 32, 18.368, 32, 17.516, 27, 16.576, 32, 15.68, 32, 8.064, 13, 8.064, 13, 15.232, 17, 16.576, 13, 17.516, 13, 20.652, 10, 20.652)

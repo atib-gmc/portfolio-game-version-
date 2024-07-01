@@ -1,0 +1,125 @@
+[gd_scene load_steps=11 format=3 uid="uid://plkd0fs5bqk0"]
+
+[ext_resource type="Script" path="res://scene/Cow.gd" id="1_snp5x"]
+[ext_resource type="Texture2D" uid="uid://7b34d1fcv5ub" path="res://assets/Characters/Free Cow Sprites.png" id="2_bqfrp"]
+
+[sub_resource type="Animation" id="Animation_ayg7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7jrhc"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_iu2sc"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sn5g7"]
+_data = {
+"RESET": SubResource("Animation_ayg7u"),
+"idle": SubResource("Animation_7jrhc"),
+"walk": SubResource("Animation_iu2sc")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ue0cy"]
+radius = 4.0
+height = 16.0
+
+[sub_resource type="Curve" id="Curve_ekxsy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.558468, 0.516981), -4.43662, -4.43662, 0, 0, Vector2(1, 0.0641509), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5xcf1"]
+curve = SubResource("Curve_ekxsy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nipkx"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+angle_min = -19.5
+angle_max = 47.5
+inherit_velocity_ratio = 0.311
+spread = 180.0
+flatness = 0.155
+initial_velocity_min = 59.78
+initial_velocity_max = 104.22
+angular_velocity_min = 0.35
+angular_velocity_max = 2.5
+gravity = Vector3(0, -12, 0)
+linear_accel_min = 12.0
+linear_accel_max = 12.0
+scale_curve = SubResource("CurveTexture_5xcf1")
+color = Color(0.968627, 0.337255, 0.243137, 1)
+
+[node name="Cow" type="CharacterBody2D"]
+scale = Vector2(0.6, 0.6)
+collision_layer = 32
+collision_mask = 47
+script = ExtResource("1_snp5x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_bqfrp")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sn5g7")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -1)
+rotation = 1.54654
+shape = SubResource("CapsuleShape2D_ue0cy")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -3.33333)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_nipkx")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.43
