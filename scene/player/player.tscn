@@ -1124,7 +1124,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8kel"]
 size = Vector2(12.4062, 11.25)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 position = Vector2(0, -1)
 scale = Vector2(0.8, 0.8)

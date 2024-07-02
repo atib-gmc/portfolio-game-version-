@@ -18,3 +18,9 @@ func _on_restart_pressed():
 func _on_quit_btn_pressed():
 	get_tree().quit()
 	pass # Replace with function body.
+
+func _on_travel_body_entered(body: Node2D):
+	print("player enter")
+	if body.is_in_group("player"):
+		get_tree().change_scene_to_file("res://scene/game/world_2.tscn")
+	pass # Replace with function body.
